@@ -346,6 +346,8 @@ telophone |--------------
 이 안에 자바스크립트에서 왔다고 알려주 필요 없이 자바스크립트 문법, 함수
 그대로 사용하면 됨
 
+** document.getElementById('X').value;
+	->현재 html안에 있는 'x'라고 지정한 id부분에 접근하겠다->그 태그안의 value값을 가져오겠다
 
 
 ### <div>태그(division)###
