@@ -1,0 +1,363 @@
+###구조###
+<!DOCTYPE html>           --html5문서는 반드시 이걸로 시작
+<html>			--시작 루트, 이 사이에 정보들 들어감
+  <head>			--브라우저에 표시X
+    <meta charset="utf-8">		--메타데이터 설정
+    <title>Hello World</title>	--document title, 그 외에도 외부파일 참조 등이 들어           
+ </head>
+   <body>					--실제 웹브라우저에서 출력되는 요소들은 
+     <h1>Hello World</h1>		  body와 body사이에
+     <p>안녕하세요! HTML5</p>
+   </body>
+</html>
+
+
+
+
+###기본문법###
+
+##요소##
+
+	시작태그 - 컨텐츠 - 종료태그
+   ex)	   <p>  Hello World! </p>
+
+-태그 ex)   <p>: 문단
+		<h1>: 제목
+		<img>: 이미지
+		<a>: 링크
+
+
+#요소의 중첩: 요소는 다른 요소를 포함할 수 있다(부자관계)#
+
+<body>         --body가 h1과 p요소를 포함
+    <h1>안녕하세요</h1>      --들여쓰기 사용
+    <p>반갑습니다!</p>
+</body>
+
+
+#빈요소: 컨텐츠를 가질 수 없는 요소#
+
+<meta charset="utf-8">   --attribute만 가진다
+ex) br, hr, img, input, link, meta
+
+
+##어트리뷰트(속성): 요소의 성질, 특징을 정의##
+--요소에 추가적 정보를 제공 Ex)이미지 파일 경로, 크기
+--어트리뷰트는 시작 태그에 위치해야 하며 이름과 값의 쌍을 이룸
+	ex) <img src="html.png" alt="HTML 로고">
+	img: 태그명 	scr, alt: 어트리뷰트명     'html.png, HTML로고': 어트리뷰트값
+
+ex) <img src="html.jpg" width="104" height="142">
+  img: 태그,   src, width, heigth: 속성명,  html.jpg, 104, 142: 속성값
+
+
+
+##주석##
+<!--주석은 화면에 표시되지 않는다.-->
+
+
+
+## 시멘틱요소: 인덱스가 포함되어있으며 사람들도 이해하기 쉬운 코드방식
+	<font size="6"><b>Hello</b></font>	--비시멘틱
+	<h1>Hello</h1>       --이 형태가 시멘틱요소
+위의 두 결과는 같지만 밑에께 더 이해쉽고 컴퓨터도 이걸 탐색하기 더 쉬워함
+
+ex) 새로 추가된 시멘틱 태그
+	<header>
+---------------------------
+<section>|
+     ---     |	  <aside>
+<article> |
+----------------------------
+	<footer>
+
+
+
+
+
+
+###태그###
+
+<< 1. 문서형식정의태그>>
+   -- 출력할 웹페이지 '형식'을 브라우저에게 전달
+	<!doctype html>
+
+
+
+<< 2. html 태그>>
+  --모든 요소의 부모요소(<!DOCTYPE>만 제외), 웹페이지에 단 하나만 존재
+	<html lang="ko"> 한국어로 설정하고 시작
+
+
+
+<< 3. head태그>>
+   --메타데이터 포함하기 위한 요소, 웹페이지에 단 하나만존재
+
+	<3.1 title >
+	문서제목, 브라우저 탭에 표시
+	<title>문서 제목</title>
+
+	<3.2  style>
+	스타일
+	<head>	
+		<style>
+     	 		body {
+       		 	background-color: yellow;
+        		color: blue;
+    	 	 	}
+    		</style>
+	</head>
+
+	<3.3 link>
+	외부 리소스와의 연계정보를 정의
+	<link rel="stylesheet" href="style.css">  -외부 css파일을 가져오겠다
+
+	<3.4 script>
+	자바스크립트 들어옴
+	<script>  --(여기안에 scr속성 사용하면 외부 자바스크립트파일 로드가능)
+     		 document.addEventListener('click', function () {
+       			 alert('Clicked!');
+     		 });
+    	</script>
+
+	<3.5 meta>
+	이 웹페이지가 어떤 정보인지 설명
+	ex) 검색엔진, 문자인코딩, 자동새로고침, 페이지표현방식
+	<head>
+    		<meta charset="UTF-8">  :문자 인코딩 설정 
+   		<meta name="keywords" content="HTML, CSS, XML, JavaScript">  :검색엔진용
+		<meta name="description" content="Web tutorials on HTML and CSS"> :설명
+		<meta name="author" content="John Doe"> :저자
+		<meta http-equiv="refresh" content="30">  :refresh 30초 기준
+	</head>
+
+
+
+
+<<4. body 태그>>
+	--메타데이터를 제외한 대부분 요소가 여기 기술
+	--그냥 문자나타내기-> 아무태그없이 그냥 쓰면됨
+
+	<4.1 hn>
+	headings (제목) 숫자 클수록 글자크기 작아짐 
+	<h1>heading</h>  ~   <h6>heading<h6>
+
+	<4.2 글자형태>
+		사이에 들어가는 애들은 해당 태그에따라 글자형태변경
+		<b>: 볼드체
+		<strong>: 볼드체
+		<i>: 이태리체
+		<em>: 강조체
+		<small>: 작아짐
+		<mark>: 형광색칠함
+		<del>: 글자위에 가로로 줄 찍 그은형태
+		<ins>: 밑줄
+		<sub>: 원래 글자보다 살짝 밑에
+		<sup>: 원래 글자보다 살짝 위에
+	
+	<4.3 본문태그>
+		<p>: 단락지정-> 이 안에있는애들이 하나의 문단
+		<br>: 줄바꿈   **빈요소
+		&nbsp; : 연속적 공백 (스페이스바 아무리 연타해도 공백 하나임) 
+		<pre>: 위의 문제를 해결 위해 이 태그 사용
+				여기안에 들어가면 타이핑한거 그대로 화면에 출력
+		<hr>: 수평줄삽입  ------------------- **빈요소
+		<q>: quote지정 " "
+		<blockquote>: 긴 인용문 지정-> 자동들여쓰기됨
+
+
+
+
+
+
+
+
+
+
+------------여러 태그들-----------------------------
+
+##하이퍼링크##
+--한 텍스트에서 다른 텍스트로 건너뛰어 읽을 수 있음
+	<a>태그 사용(anchor)
+
+	1. href속성
+      ex)   <a href="http://www.google.com">Visit google.com!</a>
+	href(속성): 이동하고자 하는 파일의 위치를 값으로 받음
+		**이때 받을 수 있는 위치는 
+			-절대URL: 실제 웹사이트 주소
+			-상대URL: 내 폴더 안의 파일위치
+			-fragment identifier: 현재 페이지 내의 위치 ex(href='#top')
+							이때 특정 위치 태그 안에 id='top'지정해줘야함
+			-메일
+			-script: 자바스크립트 기능
+	그 옆의 값: 화면상에 표시될 텍스트
+
+	2. target속성
+	<a href="http://www.google.com" target="_blank" >Visit google.com!</a>
+		target이 _self(기본값)이면 현재 윈도우에서 오픈
+			    _black면 새로운 윈도우나 탭에서 오픈
+
+
+
+##목록(list)##
+	1. ul (unordered list: 순서없는 목록)
+	<ul>
+      		<li>Coffee</li>			--들여쓰기 후 <li> (list)
+      		<li>Tea</li>			--그냥 점 표시로 하나하나 나열
+      		<li>Milk</li>
+	</ul>
+
+	2. ol (ordered list: 순서있는 목록)
+	<ol>
+     		 <li>Coffee</li>                 -- <li>는 리스트
+      		 <li>Tea</li>			1,2,3으로 각 줄에 표시
+      		 <li>Milk</li>
+    	</ol>
+
+		# ol속성#
+		<ol type="I">  	type:  숫자(1), 알파벳(A or a) ,로마숫자(I or i)
+		<ol start="3"> 	start: 3부터 시작
+		<li value="2">Coffee</li>  	li안에도 가능->이 coffee앞에 숫자 2로 따로 지정
+		<ol reversed>    거꾸로
+
+	3. 중첩목록
+	<ul>
+		<li> *** </li>
+		<li> ***			<--여기 주의
+			<ol>
+				<li> *** </li>
+			</ol>
+		</li>
+	</ul>
+
+
+
+
+##테이블##
+태그종류: table(표 틀), tr(table row)행, th(table heading)제목, td(table data) 속성값
+			이때 th와 td같이사용가능, th는 행에, 열에 둘다들어갈 수 있음
+	<tabel>
+		<tr>					--맨위에행
+			<th>1컬럼이름</th>
+			<th>2컬럼이름</th>
+			<th>3컬럼이름</th>
+		</tr>
+		<tr>					--그 다음행
+			<td>1행1열값</td>
+			<td>1행2열값</td>
+			<td>1행3열값</td>
+		</tr>
+		<tr>					--그 다음행
+			<td>2행1열값</td>
+			<td>2행2열값</td>
+			<td>2행3열값</td>
+		</tr>
+	</table>
+
+-- th 속성값: colspan, rowspan
+##1##  하나의 컬럼명에 두개 컬럼
+	<th colspan="2">Telephone</th> 
+출력)
+		Telophone
+         ---------------------------
+	 555 77 854 | 555 77 855
+
+##2## 하나의 로우명에 두개 로우
+	<th rowspan="2">Telephone:</th>
+출력)
+	       |	555 77 854
+telophone |--------------
+	       | 555 77 855
+
+
+
+
+
+
+
+##<img> 이미지 태그##
+	<img src="assets/images/doug.jpg" alt="doug" width="100">  --빈요소
+	속성: src(경로/이미지.jpg), alt(파일없으면 표시될 문장). width, height
+
+##<audio> 오디오 태그##
+	<audio src="assets/audio/Kalimba.mp3" controls></audio>
+	속성: src, autoplay, loop(반복재생), controls(음악재생도구표시 |>)
+
+##<video> 비디오 태그##
+  --비디오태그에 크기+control
+	--source태그에 src(경로)와 type(mp4)지정
+      <video width="640" height="360" controls>
+      	<source src="assets/video/wildlife.mp4" type="video/mp4">
+      </video>
+
+
+
+
+
+
+##1. <form> 폼 태그##
+--사용자가 입력한 데이터를 수집하기 위해 사용
+-- input, button등의 입력 양식 태그를 포함
+	속성: action (입력 데이터가 어디로 전송될지 지정)
+		method (get or post방식) -보내는 방식의 차이
+			get: url에 붙여 보이게, 즐찾/공유 가능
+			post: url에 안붙이고 안보이게, 공유불가, 많은데이터전송가능
+
+##1-1<input> input태그
+--데이터를 입력받음, from태그내에 존재해야함, 빈요소
+	-type 속성: button, checkbox등 존재
+	<input type="button" value="Click me" onclick="alert('Hello world!')">
+		버튼 생성, 클릭하면 click me 데이터 전달, 클릭하면 alert에 의해 helloworld출력
+
+	-name, value속성: name을 키로, value를 값으로 하여 key=value의 형태로 전송
+	<input type="checkbox" name="fruit2" value="grape"> 포도<br>
+	     체크박스 생성, 클릭하면 fruit2:grape형태로 데이터 전달, 옆에는 '포도'표시되어있음
+
+
+## 1-2 <select> 태그##
+--복수개의 리스트에서 복수개의 아이템을 선택할때 사용
+   <select name="cars1">       				        --select의 name값을 key로
+      <option value="volvo" selected>Volvo</option>	--option의 value를 값으로하여 
+      <option value="saab" disabled>Saab</option>	 --key-value형태로 데이터 전달
+      <option value="fiat">Fiat</option>
+      <option value="audi">Audi</option>
+</select>							       
+			--클릭해서 열어보면  volvo,saab,flat,audi리스트들 있음
+				<option>여기의 자동차들이 우리눈에 보임<option>
+
+## 1-3 <textarea> 태그
+--여러 줄 입력할때 사용
+<textarea name="message" rows="10" cols="30">Write something here</textarea>
+	--유전자서열 입력하는 창하고 비슷
+
+## 1-4 <button>##
+--클릭할 수 있는 버튼 생성
+--input에도 type=button있지만 버튼은 <button>안에 텍스트나 이미지 삽입가능</button>
+	<button type="button" onclick="alert('Hello World!')">Click Me!</button>
+
+## 1-5 <fieldset>##    (입력 받은 데이터를 그룹화해 저장
+		<legend> login </legend>     --박스 제목
+		username <input~>              --이름과 비번을 하나로 묶어 저장
+		password <input~>
+	  </fieldset>
+
+
+###<script> ~ </script>###
+이 안에 자바스크립트에서 왔다고 알려주 필요 없이 자바스크립트 문법, 함수
+그대로 사용하면 됨
+
+
+
+### <div>태그(division)###
+--페이지의 구획을 나눠 그룹화
+	나중에 class속성 이용해 css나 script사용시 그룹전체에 작동되게함
+
+### <footer> ###
+--페이지 하단의 정보나 내용을 나타냄(저작권, 사이트맵, 연락처
+	<footer>
+  		<p>© 2025 My Website. All rights reserved.</p>
+	</footer>
+
+
+###<span>###
+-- 그냥 내부에서 css적용시킬 부분 감싸서 사용 
