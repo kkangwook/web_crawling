@@ -51,6 +51,9 @@ ex) <img src="html.jpg" width="104" height="142">
   img: 태그,   src, width, heigth: 속성명,  html.jpg, 104, 142: 속성값
 
 
+*****
+<div class="box red large">는 class속성에 box, red , large의 3개의 속성값을 가지는 것!!!!
+*****
 
 ##주석##
 <!--주석은 화면에 표시되지 않는다.-->
