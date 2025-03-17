@@ -87,6 +87,16 @@ team=bundteam.find_all('th',attrs={'scope':'row'})
 for i in team:
     print(i.find_next_siblings('td')[5].get_text())  #6본째 td꺼
 
+
+# find외에도 select, select_one이 있음
+# 얘네들은 css의 요소들을 넣음
+
+# a태그의 class 속성명이 news_tit인 태그 
+soup.select_one('a.news_tit')  #첫번째거만
+
+soup.select('a.news_tit')   #해당 전부가져옴
+
+
 ### 4.xpath사용하기
 ## <ul>밑에 여러 <li>들 존재
 
