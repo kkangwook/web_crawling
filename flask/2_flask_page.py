@@ -9,7 +9,7 @@ def index():       #모든
     return '''<!doctype html>
     <html>
         <body>
-            <h1><a href='/'>WEB</a><h1>
+            <h1><a href='/'>WEB</a><h1>       #자기 자신으로 이동
             <ol>
                 <li><a href='/hello/1/'>여기를 각각 클릭하면</a></li>
                 <li><a href='/hello/2/'>href주소로 가고</a></li>
