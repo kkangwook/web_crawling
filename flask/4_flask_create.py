@@ -31,7 +31,7 @@ def template(list,content):
             </ol>
             {content}
             <ul>
-                <li><a href='/create/'>create</a></li>
+                <li><a href='/create/'>create</a></li>      #여기에  create칸 생성
             </ul>
         </body>
     </html>
