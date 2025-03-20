@@ -67,7 +67,7 @@ def create():
         <form action='/create/' method='POST'>
             <p><input type="text" name='title' placeholder='title'></p>
             <p><textarea name='body' placeholder='body'></textarea></p>
-            <p><input type='submit' value='입력'></p>
+            <p><input type='submit' value='입력'></p>     #여기 태그 사이에 글자있으면 버튼 옆에표시
         </form>
         '''
         return template(getcontent(),in_put)      #입력값 없으면 나 자신으로
