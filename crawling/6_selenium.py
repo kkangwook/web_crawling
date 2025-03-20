@@ -7,7 +7,7 @@
 ## 1.기본 작동
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys  #키보드 다룰 수 있게
-from selenium.webdriver.common.by import By
+from selenium.webdriver.common.by import By    #element 가져올수있게
 import time
 
 driver=webdriver.Chrome()    #자동으로 크롬드라이버 실행
