@@ -68,7 +68,7 @@ def create():
             <p><input type='submit' value='입력'></p>
         </form>
         '''
-        return template(getcontent(),in_put)
+        return template(getcontent(),in_put)      #입력값 없으면 나 자신으로
     elif request.method=='POST':   #입력하면 post방식으로 나오면서 실행
         global nextid        #함수안에서 쓰고 그 값이 영구히 바껴야하므로
         title=request.form['title']     #해당 name값에서 받은 데이터 변수에 저장
