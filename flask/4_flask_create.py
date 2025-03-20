@@ -58,6 +58,8 @@ nextid=4  #앞으로 새로운 값 입력받을때마다 4에서부터 1씩 증�
 
 
 #입력받을 수 있는 페이지 만들기!!!
+#새로 접속하거나 새로고침했을때: get방식
+#입력 폼을 작성하고 입력버튼 누르면 post방식
 @app.route('/create/',methods=['GET','POST'])
 def create():
     if request.method=='GET':    #method값이 get인지 post인지/ 아무것도 입력안하고 클릭하면 get나와서 화면 그대로
