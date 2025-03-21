@@ -1,68 +1,68 @@
-##1. 기본구조
-from flask import Flask
+## flask는 기본적으로 안에 jinja2 템플릿 엔진을 내장중이어서 import필요X !!!!
+#render_template함수 사용
+from flask import Flask, render_template
 
 app=Flask(__name__)
 
 @app.route('/')
-def index():
-    return 'hi'     #페이지 열면 hi만 출력
-
+def home():
+    return render_template('index.html')   #index.html파일 가져옴
 app.run()
 
-#1-1. 하고 터미널에서 cd로 이 파일이 있는 디렉토리로 이동 후
-# cd c:/doit/crawling-> python web_flask.py하고 엔터
-# 주소뜨면 컨트롤+클릭으로 사이트 들어가면 hi뜸
+## html파일 위치!!!!
+/my_flask_app_folder   내가 만든 루트폴더
+│-- app.py                이 폴더 안에 현재의 파이썬 파일
+│-- /templates            루트 폴더에 templates라는 이름의 폴더 생성
+│   │-- index.html            이 안에 html파일 필요!!!!!!!
 
-#1-2. or 그냥 파이썬에서 실행하고 url클릭
+## index.html파일 내부
+<!DOCTYPE html>
+<html>
+<head>
+    <title>사용자 페이지</title>
+</head>
+<body>
+    <h1>안녕하세요, {{ username }}님!</h1>
+</body>
+</html>
 
-##주의: 실행된 상태여야 페이지 정상작동->ctrl+c하고 url들어가면 안뜸
-##또한 내부 수정하고 페이지 새로고침해도 안바뀜->껏다 다시켜야함
-#  ㄴ이를 위해 옵션
-app.run(debug=True)  #수정시 자동으로 껐다 켜줌->남들한테 배포할땐 모조건 꺼야 부하X
 
-
-
-##2. 함수사용->동적으로: ex)랜덤 숫자 페이지에 출력해보기
-import random
-
-app=Flask(__name__)
-
+## jinja2는 {{}}사용
+## {{변수1}}  하고 변수1=안녕 하면 안녕이라는 값이 출력  
+# 1. 값을 변수안에
 @app.route('/')
-def index():
-    return str(random.random())     #출력값은 무조건 문자열만 가능
-                                    #따라서 str로
-app.run(debug=True)
-
-#이러면 새로고침할때마다 매번 다른 랜덤값 나옴
-
-#더 세련되게
-@app.route('/')
-def index():
-    return 'random:<strong>'+str(random.random())+'</strong>'  #return은 무조건 ''안에 
-                                # ㄴ함수쓰기 위해 ''밖에 쓰고 str화 하고 더하기
-app.run(debug=True)
-#이는 html상 'random:' <strong>0.221834927~</strong> 으로 나타나짐
+def home():
+    return render_template('index.html', username="홍길동")   #->안녕하세요 홍길동님! 으로 출
+app.run()
 
 
-##3. 라우팅: 어떤 주소를 누가 담당할것인가, 어떤 요청을 어떤 함수가 응답할것인가 연결시켜주는 작업
-# route 데코레이터가 이 역할을 함
-@app.route('/') # '/'만 돼있으면 어떤 사용자가 path를 입력하지않고 접속하면 이 밑의 함수가 작동
-def index():
-    return 'hi'
+## 2. 변수를 변수안에
+@app.route('/user/<name>')   #여기있는 값이 들어감
+def user(name):
+    return render_template('user.html', username=name)   #url값을 body
 
 
-@app.route('/hello') # ~.com/hello로 접속하면 hello()함수가 작동
-def hello():
-    return 'hello, world'
-app.run()        ## app.run()은 맨 밑에 딱 하나만!!!!
+
+## 3. 변수 여러개 넣기
+
+--html 구조--
+<body>    
+    <p>이름: {{ user.name }}</p>
+    <p>나이: {{ user.age }}</p>
+    <p>도시: {{ user.city }}</p>
+</body>
+
+@app.route('/profile')
+def profile():
+    user_info = {'name': '홍길동', 'age': 25, 'city': '서울'}
+    return render_template('profile.html', user=user_info)
+
+# 이는 jinja2의 문법방식임
+user.name → user_info['name'] (홍길동)
+user.age → user_info['age'] (25)
+user.city → user_info['city'] (서울)
+즉, Jinja2에서 user.속성명은 user['속성명']과 같은 방식으로 동작
 
 
-#라우팅시 변수삽입하는법
-# ~.com/hello/1    #1번 id정보에 접속
-#   하지만 2,3,4,~번에도 접속하고 싶다면?
-# <>사용
-@app.route('/hello/<id>')   #이 id는 변수로 다른이름도 상관X
-def hello(id):
-    return f'hello, world{id}'
-app.run(debug=True)
-# ~.com/hello/1로 접속하면 hello, world1,다른 숫자 n으로 접속하면 hello, worldn
+##4. 조건문 사
+
