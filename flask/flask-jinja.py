@@ -64,7 +64,7 @@ user.city → user_info['city'] (서울)
 즉, Jinja2에서 user.속성명은 user['속성명']과 같은 방식으로 동작
 
 
-##4. 조건문 사용
+##4. 조건문 사용:   {%  %}형
 템플릿내부:
 <body>
     {% if name %}
@@ -86,10 +86,31 @@ user.city → user_info['city'] (서울)
 {% endif %}
 
 
+##5. 템플릿필터 '|' 사용
+<p>{{ user_name | capitalize }}</p>    # user-name잎글자만 대문
+<p>{{ user_name | lower }}</p>         
+<p>{{ user_name | upper }}</p>  
+<p>{{ user_name | truncate(5) }}</p>
 
 
+##6. 반복문
+<ul>
+    {% for fruit in fruits %}
+        <li>{{ fruit }}</li>
+    {% endfor %}           #endfor사용
+</ul>
+그리고 render_template('profile.html', fruits=['apple','orange','melon']) 의 리스트 형태로
 
+## 이때 while문은 지원하지 않음!!!!!
 
+##7. macro(함수, def랑 같은 작용)
+{% macro input(name, value='', type='text') %}  #input이라는 이름과 파라미터들
+    <input type="{{ type }}" name="{{ name }}" value="{{ value }}">  #얘네들이 들어감
+{% endmacro %}  #끝낼때
 
+#만들고 html에서 사용
+<form>
+    {{ input(name='unique_name', value='입력하시오',type='text') }}
+</form>
 
-
+결과: <input type="text" name="unique_name" value="입력하시오">가 form사이에 삽
