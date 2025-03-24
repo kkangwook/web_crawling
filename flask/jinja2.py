@@ -133,7 +133,6 @@ print(result)
 {% endmacro %'}'
 
 #b.html - 'templates' 디렉토리에 저장:
-출처: https://recording-it.tistory.com/91 [나를 위한 꾸준한 기록:티스토리]
 {% from 'macro.html' import input %}
 
 {{
