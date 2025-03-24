@@ -133,7 +133,7 @@ print(result)
 {% endmacro %'}'
 
 #b.html - 'templates' 디렉토리에 저장:
-{% from 'macro.html' import input %}
+{% from 'b.html' import input %}
 
 {{
     input('username')
