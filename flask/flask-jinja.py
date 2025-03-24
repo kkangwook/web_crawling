@@ -104,11 +104,12 @@ user.city → user_info['city'] (서울)
 ## 이때 while문은 지원하지 않음!!!!!
 
 ##7. macro(함수, def랑 같은 작용)
+# html에서 매크로 만들고
 {% macro input(name, value='', type='text') %}  #input이라는 이름과 파라미터들
     <input type="{{ type }}" name="{{ name }}" value="{{ value }}">  #얘네들이 들어감
 {% endmacro %}  #끝낼때
 
-#만들고 html에서 사용
+#만든걸 다시 html에서 사용
 <form>
     {{ input(name='unique_name', value='입력하시오',type='text') }}
 </form>
