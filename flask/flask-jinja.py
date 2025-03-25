@@ -92,6 +92,11 @@ user.city → user_info['city'] (서울)
 <p>{{ user_name | upper }}</p>  
 <p>{{ user_name | truncate(5) }}</p>
 
+***!!!!!!!!!!!!***
+단순 값이 아닌 html구조로 넣고 싶다면
+{{content | safe}}  로 해줘야지 문자열로 출력안되고 html구조로 출력
+***!!!!!!!!!!!!***
+
 
 ##6. 반복문
 <ul>
