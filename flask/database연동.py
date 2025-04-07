@@ -90,3 +90,28 @@ except Exception as e :
 finally :
     cursor.close()
     conn.close()
+
+
+#추가: 다량의 데이터 삽입하기
+import oracledb
+
+conn = oracledb.connect(dsn='127.0.0.1:1521/XE',
+                            user='c##scott',
+                            password='tiger') 
+  
+# 텍스트 파일에서 읽어 \t로 split하고 조건에 맞는 레코드만 삽입
+cursor = conn.cursor() 
+path=r'C:/ITWILL/2_Python/workspace/chap08_DB_conn/data (1)'
+f=open(path+'/zipcode.txt','r',encoding='utf-8')
+a=f.readlines()
+for i in a:
+    i=i.split('\t')
+    if i[1].startswith('서울'):
+        zipcode=str(i[0])
+        city=i[1]
+        gu=i[2]
+        dong=i[3]
+        detail=i[4]
+        query=f"insert into zipcode_tab values('{zipcode}','{city}','{gu}','{dong}','{detail}')"
+        cursor.execute(query)
+conn.commit()
