@@ -9,10 +9,10 @@ import pandas
 # Oracle DB 연결 정보 설정
 username = "c##scott"
 password = "tiger"
-dsn = "localhost:1521/orcl"  # or "host:port/service_name"
+dsn='127.0.0.1:1521/XE'  # or "host:port/service_name"
 
 # DB 연결
-conn = cx_Oracle.connect(username, password, dsn,encoding='utf-8')
+conn = oracledb.connect(username, password, dsn='127.0.0.1:1521/XE',encoding='utf-8')
 cursor = conn.cursor()   #커서는 다중행 테이블
 
 # 간단한 쿼리 실행
@@ -44,6 +44,10 @@ cursor.execute(sql, [280 , 'facility'])  #리스트, 딕셔너리의 형태로 �
 #리스트 안의 개수와 바인딩 변수의 개수는 같아야
 
 
+#레코드 삭제 
+data=[50]
+query = "delete from dept01 where deptno=:1" # 부서테이블  
+cursor.execute(query,data)
 
 
 #pandas에 저장
@@ -55,3 +59,34 @@ print(df)
 # 연결 종료
 cursor.close()
 conn.close()
+
+
+#추가: 전체과정
+try :
+    # db 연동 객체 생성 
+    conn = oracledb.connect(dsn='127.0.0.1:1521/XE',
+                            user='c##scott',
+                            password='tiger') 
+    # sql문 실행 객체 
+    cursor = conn.cursor()    
+    data=[10,30]
+    # 4. 레코드 수정 
+    query = "update dept01 set dname='NONE' where deptno in(:1,:2)" # 부서테이블  
+    cursor.execute(query,data)   
+    cursor.execute('select * from dept01')
+    dataset = cursor.fetchall() # 전체 레코드 
+    
+    print('-'*40)
+    print('code\t name\t\t\t  loc')
+    print('-'*40)
+    for row in dataset :
+        print("{0:^4}\t{1:<12}\t{2:<5}".format(row[0],row[1],row[2]))
+        
+    print('-'*40)
+    print('전체 레코드 수 : ', len(dataset))        
+
+except Exception as e :
+    print('db error :', e)        
+finally :
+    cursor.close()
+    conn.close()
