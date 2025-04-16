@@ -1,0 +1,22 @@
+css-> class는 중복으로 사용가능 but id는 한번만 사용가능
+
+form의 자식들: input, select
+input의 type종류:
+	text, password, submit(전송버튼)
+	reset: 취소버튼
+	radio: 레디오버튼/체크상자
+         	<input type="radio" name="gender" value="남"> 남자
+         	<input type="radio" name="gender" value="여" checked>여자   
+			->gender라는 변수에 value값인 남or여로 저장
+	file: file선택(클릭하면 디렉토리 열림)
+		<input type="file" name = "filename" size ="15"/>  
+			->파일선택시 filename변수에 파일정보저장
+
+select: 옵션들이 밑으로 열리고 선택가능
+          <select name ="job" size="1">
+             <option value="없음">### 직업을 선택하세요. ### </option>
+             <option value="학생">학생 </option>
+             <option value="회사원">회사원 </option>
+             <option value="기타">기타 </option>
+           </select>
+		->선택시 name의 job이라는 변수에 value값이 저장            
