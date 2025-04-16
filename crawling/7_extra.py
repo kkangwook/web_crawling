@@ -45,6 +45,9 @@ id-> soup.select_one('a#tab')
 class-> soup.select(".odd")
 태그[속성='속성값'] -> soup.select("tr[class='odd']")
 
-계층적 선택자 -> soup.select('#tab > tr > th')
+계층적 선택자 -> soup.select('#tab > tr > th')   단 >사용할꺼면 바로밑의 자손이어야함!!!!!!!!!!!!!!!!!!!
 예시: html.select('div.news_view > div.article_view > section > p')
   -> div태그중 class로 news_view를 갖는애 밑의 div태그중 article_view라는 class를 가지는 태그 밑에 section태그 밑의 모든 p태그를 가져오겠다
+
+좀떨어져 있는 자손 찾을때->
+soup.select('#tab > tr > th') 대신 soup.select('#tab th')가능!!!!!!!!!
