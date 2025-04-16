@@ -51,3 +51,49 @@ class-> soup.select(".odd")
 
 좀떨어져 있는 자손 찾을때->
 soup.select('#tab > tr > th') 대신 soup.select('#tab th')가능!!!!!!!!!
+
+
+--------------------------------------------------------------------------------------------------------------------
+selenium find_element   ->class_name, id외
+driver.find_element(By.NAME, 'name이름') # name 속성으로 찾기
+
+driver.find_element(By.TAG_NAME, 'p') # tag 이름으로 찾기
+
+driver.find_element(By.XPATH, 'xpath') # 절대경로 or 상대경로로 찾기
+login=driver.find_element(By.XPATH,'//*[@id="account"]/div/a') #우클릭->복사->xpath복붙
+
+driver.find_element(By.LINK_TEXT,'텍스트')  # a태그안의 .text
+driver.find_element(By.LINK_TEXT,'경제')  #경제라는 텍스트와 링크를 가지면 가져올수있음->애매할때가 많아 잘 사용 X
+
+driver.find_element(By.CSS_SELECTOR, ‘CSS선택자이름’) # 선택자로 찾기
+driver.find_element(By.CSS_SELECTOR,'#account > div > a')  #우클릭->복사->selector복사
+
+
+
+
+
+
+
+from selenium.webdriver.common.keys import Keys
+
+
+
+
+driver.get('https://www.naver.com/')
+query_btn = driver.find_element(By.ID,'search-btn')   #검색버튼
+query=driver.find_element(By.ID,'query')      #검색창
+query.send_keys('안녕')            #검색문 입력
+
+-엔터하고 싶으면 둘 중 하나
+query.send_keys(Keys.ENTER)
+login_btn.click() # 로그인 버튼 클릭 
+time.sleep(2) # 2초 일시 중지 
+
+driver.back() # 현재페이지 -> 뒤로
+time.sleep(2) # 2초 일시 중지 
+  
+driver.forward() # 현재페이지 -> 앞으로 
+driver.refresh() # 페이지 새로고침(F5)
+time.sleep(2) # 2초 일시 중지 
+
+driver.close() # 현재 창 닫기 
