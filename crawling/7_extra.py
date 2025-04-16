@@ -22,6 +22,9 @@ urlretrieve(img_url, file_name)   #url과 파일이름 넣으면 됨
  -> request의 f.write(res.content)와 유사
 
 
+# 1. requests에서 글자깨지면
+res=requests.get(url,headers=headers)
+res.encoding='utf-8'      #encoding해줌
 
 # 2. 어떤 parser 사용?
 1. 간단한 웹페이지 → html.parser
