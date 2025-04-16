@@ -54,7 +54,7 @@ soup.select('#tab > tr > th') 대신 soup.select('#tab th')가능!!!!!!!!!
 
 
 --------------------------------------------------------------------------------------------------------------------
-selenium find_element   ->class_name, id외
+1. selenium find_element   ->class_name, id외
 driver.find_element(By.NAME, 'name이름') # name 속성으로 찾기
 
 driver.find_element(By.TAG_NAME, 'p') # tag 이름으로 찾기
@@ -67,6 +67,7 @@ driver.find_element(By.LINK_TEXT,'경제')  #경제라는 텍스트와 링크를
 
 driver.find_element(By.CSS_SELECTOR, ‘CSS선택자이름’) # 선택자로 찾기
 driver.find_element(By.CSS_SELECTOR,'#account > div > a')  #우클릭->복사->selector복사
+f12후 select버튼 누르고 갔다대면 맨 위에 나오는게 css_selector
 
 
 
@@ -74,9 +75,9 @@ driver.find_element(By.CSS_SELECTOR,'#account > div > a')  #우클릭->복사->s
 
 
 
+
+2. selenium 버튼
 from selenium.webdriver.common.keys import Keys
-
-
 
 
 driver.get('https://www.naver.com/')
@@ -97,3 +98,63 @@ driver.refresh() # 페이지 새로고침(F5)
 time.sleep(2) # 2초 일시 중지 
 
 driver.close() # 현재 창 닫기 
+
+
+네이버 같은데에 입력하고싶을때
+input_url=f"https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query={input}"
+
+
+3. 로봇이 아닙니다
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.add_argument('--disable-blink-features=AutomationControlled')
+driver = webdriver.Chrome(options=options)
+
+
+4. 검색 후 찾기
+주의!!!->처음 driver.get이후 이 url은 send_key나 click을 통해 그 값이 계속 바뀌기 때문에 driver를 고쳐줄 필요없이
+그냥 옮겨진화면에서 driver.find_element하면됨
+단 새창이 열리는게 아닌 기존 창을 계속유지해야함!!!!!!!!
+
+예시)
+driver.get('https://www.naver.com/') # url 이동 
+time.sleep(3)
+cafe=driver.find_element(By.LINK_TEXT,'카페')
+driver.execute_script("arguments[0].removeAttribute('target')", cafe)  이과정이 중요!!!!!
+cafe.click()
+time.sleep(3)
+
+hot=driver.find_element(By.XPATH,'//*[@id="gnbMenu"]/a[4]')   #그대로 사용가능
+hot.click()
+time.sleep(3)
+toptext=driver.find_elements(By.CLASS_NAME,'tit')    #그대로 사용기능
+for i in toptext:
+    print(i.text)
+print(len(toptext))
+driver.close()
+
+함수만들기
+def googleSearch(searchword):
+    driver_path = ChromeDriverManager().install() # 드라이버 설치 경로 
+    correct_driver_path = os.path.join(os.path.dirname(driver_path), "chromedriver.exe") # 실행파일경로 
+    #driver = webdriver.Chrome(service=Service(executable_path=correct_driver_path)) # 드라이버 생성 
+
+    # '로봇이 아닙니다' 라는 메시지가 나오는 경우
+    options = Options()
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    driver = webdriver.Chrome(options=options)
+
+    # 2. url 이동 : 구글 페이지 이동 
+    driver.get("https://www.google.com/") # 구글 페이지 이동
+    box=driver.find_element(By.NAME,'q')
+    box.send_keys(i)
+    box.send_keys(Keys.ENTER)
+    time.sleep(3)
+    h3=driver.find_elements(By.TAG_NAME,'h3')
+    list=[i.text for i in h3]
+    driver.close()
+    return list
+searchword_list = ['머신러닝','통게분석','SQL']
+for i in searchword_list:
+    print(googleSearch(i))
