@@ -134,7 +134,37 @@ for i in toptext:
 print(len(toptext))
 driver.close()
 
-함수만들기
+
+5. 안나오는 이미지 src찾기
+url = f"https://search.naver.com/search.naver?query={query}" # 기본 url 
+    
+driver.get(url) # url 이동  
+time.sleep(2) # 3초 대기 
+    
+    
+# 3. [이미지] 링크 클릭 -> 이미지 검색 페이지 이동  
+image_tab=driver.find_element(By.XPATH,'//*[@id="lnb"]/div[1]/div/div[1]/div/div[1]/div[1]/a')
+image_tab.click()
+    
+    
+# 4. 이미지 10개 수집         
+time.sleep(5)  
+for i in range(1,11):         xpath f''로 해서 가져오기!!!!1
+    image=driver.find_element(By.XPATH,f'//*[@id="main_pack"]/section/div[1]/div/div/div[1]/div[{i}]/div/div/div/img')
+    print(image.get_attribute('src'))
+
+각 그림에 대한 xpath찾은방법
+-> 하나씩 다 뽑아봐서 딱하나 차이나는것을 찾음
+'''
+//*[@id="main_pack"]/section/div[1]/div/div/div[1]/div[1]/div/div/div/img
+//*[@id="main_pack"]/section/div[1]/div/div/div[1]/div[2]/div/div/div/img
+//*[@id="main_pack"]/section/div[1]/div/div/div[1]/div[3]/div/div/div/img
+'''
+
+
+
+
+6. 함수만들기
 def googleSearch(searchword):
     driver_path = ChromeDriverManager().install() # 드라이버 설치 경로 
     correct_driver_path = os.path.join(os.path.dirname(driver_path), "chromedriver.exe") # 실행파일경로 
@@ -158,3 +188,21 @@ def googleSearch(searchword):
 searchword_list = ['머신러닝','통게분석','SQL']
 for i in searchword_list:
     print(googleSearch(i))
+
+
+7. 화면 스크롤바를 내려야 할수도 있음
+last_height = driver.execute_script("return document.body.scrollHeight") #현재 스크롤 높이 계산
+
+while True: # 무한반복
+    # 브라우저 끝까지 스크롤바 내리기
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") 
+    
+    time.sleep(2) # 2초 대기 - 화면 스크롤 확인
+
+    # 화면 갱신된 화면의 스크롤 높이 계산
+    new_height = driver.execute_script("return document.body.scrollHeight")
+
+    # 새로 계산한 스크롤 높이와 같으면 stop
+    if new_height == last_height: 
+        break
+    last_height = new_height # 새로 계산한 스크롤 높이로 대체 
