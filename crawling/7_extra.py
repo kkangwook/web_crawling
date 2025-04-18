@@ -54,6 +54,26 @@ soup.select('#tab > tr > th') 대신 soup.select('#tab th')가능!!!!!!!!!
 
 
 --------------------------------------------------------------------------------------------------------------------
+from selenium import webdriver # driver 
+from selenium.webdriver.chrome.service import Service # Chrom 서비스
+from webdriver_manager.chrome import ChromeDriverManager # 크롬드라이버 관리자  
+from selenium.webdriver.common.by import By # 로케이터
+from selenium.webdriver.common.keys import Keys
+import os
+import time # 화면 일시 정지 
+
+# 1. 크롬 driver 생성 
+driver_path = ChromeDriverManager().install() # 드라이버 설치 경로 
+correct_driver_path = os.path.join(os.path.dirname(driver_path), "chromedriver.exe") # 실행파일경로 
+driver = webdriver.Chrome(service=Service(executable_path=correct_driver_path)) # 드라이버 생성 
+
+
+# 2. 대상 url 이동 
+driver.get('https://www.naver.com/')
+
+
+
+
 1. selenium find_element   ->class_name, id외
 driver.find_element(By.NAME, 'name이름') # name 속성으로 찾기
 
