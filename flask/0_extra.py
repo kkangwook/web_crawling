@@ -49,4 +49,16 @@ def view() :
     scores = [85, 65, 95]  
     return render_template('/step02/view.html',name=username, scores=scores) #여기에 넣음
 
--- jinja2로 app.route()파라미터에 전송
+
+-- jinja2로 app.route()파라미터에 전송 -> <>사용
+#url.html
+<a href='/url/{{ 객체 }}'>{{객체}}</a>
+#python
+@app.route('/url')
+def tempo1()
+    return render_template(file, 객체='홍길동')
+
+->홍길동 링크 클릭->
+@app.route('/url/<객체>')
+def tempo2(객체):
+    return render_template(newfile,변수=객체)
