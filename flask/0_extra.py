@@ -13,6 +13,7 @@ def index() : # 응답 함수
 
 --이미지 가져오기
 # {{ url_for('폴더위치',filename='~/~.jpg) }} 는 jinja2의 이미지 연결 표현
+    #-> 웹문서의 경로가 바뀌어도 이미지 위치는 고정
 <img src="{{ url_for('static', filename='images/ai.jpg') }}"/> 
 # .py가 있는 위치에서 static=폴더위치 filename=그 폴더 안에서부터 디렉토리/파일명
 
