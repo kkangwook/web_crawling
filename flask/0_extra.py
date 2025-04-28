@@ -62,3 +62,20 @@ def tempo1()
 @app.route('/url/<객체>')
 def tempo2(객체):
     return render_template(newfile,변수=객체)
+
+
+--form--
+<form method='get' action='/'>일 경우
+request.args.get('name')으로 가져올 수 있음
+
+post는 request.form['name']
+
+-->입력받은 변수 불러오기는 같은 라우트나 action에 의해 이동되는 라우트에서만 받을 수 있음
+--> 그 외의 라우트에서 불러오는법: session(딕셔너리처럼 작동)
+    from flask import session
+    # a라우트
+    a_value = request.form['name']
+    session['name'] = a_value  # 세션에 값 저장
+    #b라우트
+    b_value=session.get('name', 'No name found') # 세션에서 값 가져오기
+    
