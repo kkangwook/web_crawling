@@ -93,3 +93,43 @@ def deptInfo() :
     dloc = request.args.get('dloc')
     # 템플릿에 값들 넘기기 
     return render_template('/exam03/dept_info.html', dno = dno, dname=dname, dloc=dloc)
+
+
+
+-----서비스 제공하기------
+.py파일의 같은위치에 service폴더 만들고 안에 제공할 함수나 프로그램.py를 넣음
+-> from service.~py import 함수명 하고 쓰면 됨
+
+ex)
+.html파일
+<form name="login" method="POST" action="/service2_result">
+    <textarea id="comments" name="texts" rows="3" cols="50">
+    <input type="submit" value="제출">
+</form>
+
+.py파일
+@app.route("/service2_result", methods =['POST'])
+def service2_result():
+    texts = request.form['texts']      
+    
+    # 텍스트분류 모델 import 
+    from service.simple_classifier import classifier 
+    y_pred_result = classifier(texts)  #함수에 request.form으로 받아온 데이터 그냥 집어넣음
+    
+    return render_template('/step04/service2_result.html',
+                           texts=texts, y_pred_result=y_pred_result) 
+
+service2_result.html파일
+<textarea rows=3 cols="50">  {{ texts }}  </textarea>   #여기에 넣음
+<td id = "result"> {{ y_pred_result }} </td>
+
+simple_classifier.py
+def classifier(texts_test) :
+    global model, tfidf # 학습모델
+    
+    DTM_test = tfidf.transform([texts_test]) 
+    X_test = DTM_test.toarray()
+    
+    y_pred = model.predict(X = X_test) # y예측 
+    y_pred_result = '부정문 입니다.'if y_pred == 1 else '긍정문 입니다.'
+    return y_pred_result
