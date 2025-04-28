@@ -64,7 +64,9 @@ def tempo2(객체):
     return render_template(newfile,변수=객체)
 
 
---form--
+------form------
+method지정 안해주면 defalut는 'get'
+
 <form method='get' action='/'>일 경우
 request.args.get('name')으로 가져올 수 있음
 
@@ -79,3 +81,15 @@ post는 request.form['name']
     #b라우트
     b_value=session.get('name', 'No name found') # 세션에서 값 가져오기
     
+--form형식없이 url로 method는 get으로 정보전달
+html파일
+<a href="{{url_for('deptInfo',dno='30', dname='영업부', dloc='싱가폴')}}"> 30 </a>  #{{url_for(라우트주소, 변수='값}}'
+이 30적힌링크 클릭하면(데이터 입력할 필요 없이 클릭)
+.py
+@app.route('/deptInfo', methods = ['GET']) # get 방식 전송 -defalut
+def deptInfo() :   
+    dno = request.args.get('dno') # 위의 변수들 받아옴
+    dname = request.args.get('dname')
+    dloc = request.args.get('dloc')
+    # 템플릿에 값들 넘기기 
+    return render_template('/exam03/dept_info.html', dno = dno, dname=dname, dloc=dloc)
