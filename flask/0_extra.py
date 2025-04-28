@@ -119,11 +119,16 @@ def service2_result():
     return render_template('/step04/service2_result.html',
                            texts=texts, y_pred_result=y_pred_result) 
 
+
+
 service2_result.html파일
 <textarea rows=3 cols="50">  {{ texts }}  </textarea>   #여기에 넣음
 <td id = "result"> {{ y_pred_result }} </td>
 
-simple_classifier.py
+
+
+
+simple_classifier.py파일
 def classifier(texts_test) :
     global model, tfidf # 학습모델
     
