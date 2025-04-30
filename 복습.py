@@ -17,3 +17,4 @@
 8. 이 /emp/는 templates안의 practice.html로 불러와 jinja2형식 사용-> for문과 if문 사용해 입력받은 이름은 'ename의 월급은 sal원입니다 볼드체로 출력'
 ->그 밑에 static/images에서 홍길동 사진 가져옴-> 그 외의 선택받지 않은 ename들은 '누군가의 월급은 sal원'으로 리스트로 모두 출력
 ->다른정보보기 링크로 /database/로 이동하는 링크 생성
+-> app.py에서는 session간단하게 사용해보기 (app.secret_key = '임의의_비밀키') 작성 필요
