@@ -1,3 +1,10 @@
+from selenium.webdriver.support.ui import WebDriverWait 하고
+element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/section/section/main/div/form/div/span/input'))) 하면 해당 구조가 나올때까지 기다렸다가 구조가져옴 (find_element와 유사)
+-박스에 입력문넣어 enter하는 경우 .back으로 돌아가 다시 입력하려면 box.clear()가 반드시 필요
+
+
+
 # webcrawling
 1. beautifulsoup의 find로 축구팀 리스트 가져오기
 2. beautifulsoup의 select로 계층적 선택자 이용해 한번에 탑뉴스리스트 전부->여기서 링크 추출
