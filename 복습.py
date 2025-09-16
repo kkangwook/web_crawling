@@ -2,8 +2,24 @@ from selenium.webdriver.support.ui import WebDriverWait 하고
 element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/section/section/main/div/form/div/span/input'))) 하면 해당 구조가 나올때까지 기다렸다가 구조가져옴 (find_element와 유사)
 -박스에 입력문넣어 enter하는 경우 .back으로 돌아가 다시 입력하려면 box.clear()가 반드시 필요
+-------------------------------------------------------------------
+from selenium import webdriver # driver 
+from selenium.webdriver.chrome.service import Service # Chrom 서비스
+from webdriver_manager.chrome import ChromeDriverManager # 크롬드라이버 관리자  
+from selenium.webdriver.common.by import By # 로케이터
+from selenium.webdriver.common.keys import Keys
+import os
+import time # 화면 일시 정지 
+
+# 1. 크롬 driver 생성 
+driver_path = ChromeDriverManager().install() # 드라이버 설치 경로 
+correct_driver_path = os.path.join(os.path.dirname(driver_path), "chromedriver.exe") # 실행파일경로 
+driver = webdriver.Chrome(service=Service(executable_path=correct_driver_path)) # 드라이버 생성 
 
 
+# 2. 대상 url 이동 
+driver.get('https://www.naver.com/')
+-------------------------------------------------------------------
 
 # webcrawling
 1. beautifulsoup의 find로 축구팀 리스트 가져오기 ->이제는 셀레니움만 됨
