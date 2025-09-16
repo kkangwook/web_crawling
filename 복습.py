@@ -3,6 +3,8 @@ element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/section/section/main/div/form/div/span/input'))) 하면 해당 구조가 나올때까지 기다렸다가 구조가져옴 (find_element와 유사)
 -박스에 입력문넣어 enter하는 경우 .back으로 돌아가 다시 입력하려면 box.clear()가 반드시 필요
 -------------------------------------------------------------------
+import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver # driver 
 from selenium.webdriver.chrome.service import Service # Chrom 서비스
 from webdriver_manager.chrome import ChromeDriverManager # 크롬드라이버 관리자  
@@ -19,13 +21,16 @@ driver = webdriver.Chrome(service=Service(executable_path=correct_driver_path)) 
 
 # 2. 대상 url 이동 
 driver.get('https://www.naver.com/')
+time.sleep(2)
+html = driver.page_source   #이렇게 하면 못읽던 html구조가져와 soup으로 읽어낼수있음
+soup = BeautifulSoup(html, "html.parser")
 -------------------------------------------------------------------
 
 # webcrawling
-1. beautifulsoup의 find로 축구팀 리스트 가져오기 ->이제는 셀레니움만 됨
-2. beautifulsoup의 select로 계층적 선택자 이용해 한번에 다음 스포츠 탑뉴스리스트 전부->여기서 링크 추출
-3. beautifulsoup으로 1~10페이지의 극내 시총 주식정보 스크래핑 후 csv로 저장
-4. selenium으로 query입력받은 다음 네이버 홈페이지에 입력 후 이동->뒤로->앞으로->새로고침-> 이미지로 이동 후 상단 10개 이미지 저장하기
+1. 네이버 해외축구사이트에서 bs(select와 findall둘다 이용해보기)와 sel둘다로 각각 뉴스리스트텍스트와 링크 가져오기
+        #####(이때 selenium의 By.css_selector는 bs의 select와 원리가 같음!!!!!!!!)####
+2. beautifulsoup으로 1~10페이지의 극내 시총 주식정보 스크래핑 후 csv로 저장
+3. selenium으로 query입력받은 다음 네이버 홈페이지에 입력 후 이동->뒤로->앞으로->새로고침-> 이미지로 이동 후 상단 10개 이미지 저장하기
 
 
 # flask
